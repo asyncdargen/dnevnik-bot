@@ -5,7 +5,7 @@ from typing import TypeVar
 T = TypeVar('T')
 
 
-def exclude(*elements: T, collection: list[T]) -> list[T]:
+def exclude(*elements: T, collection: list) -> list:
     for element in elements:
         try:
             collection.remove(element)

@@ -11,8 +11,8 @@ class Cache(Generic[K, V]):
         self.expire_time = expire_time * 1000
         self.auto_cleanup = auto_cleanup
 
-        self.data = dict[K, V]()
-        self.times = dict[K, float]()
+        self.data = dict()
+        self.times = dict()
 
     def cleanup(self):
         for (key, timestamp) in self.times:

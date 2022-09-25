@@ -23,7 +23,7 @@ def type_keys(element: WebElement, value):
 class DnevnikWebdriver:
 
     @staticmethod
-    def fetch_cookies(login: str, password: str) -> dict[str, str]:
+    def fetch_cookies(login: str, password: str) -> dict:
         driver = DnevnikWebdriver(login, password)
 
         try:
@@ -82,8 +82,8 @@ class DnevnikWebdriver:
     def close(self):
         self.driver.close()
 
-    def cookies(self) -> dict[str, str]:
-        cookies = dict[str, str]()
+    def cookies(self) -> dict:
+        cookies = dict()
 
         for cookie in self.driver.get_cookies():
             cookies[cookie["name"]] = cookie["value"]

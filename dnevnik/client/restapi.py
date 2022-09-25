@@ -17,7 +17,7 @@ class DnevnikRestClient:
     def __make_get_request(self, path, query: dict = None) -> Response:
         return get(DNEVNIK_API_END_POINT + path, params=query, headers=self.__prepare_headers())
 
-    def __prepare_headers(self) -> dict[str, str]:
+    def __prepare_headers(self) -> dict:
         return {
             "Auth-Token": self.__auth_token,
             "Profile-Id": self.__profile_id,
