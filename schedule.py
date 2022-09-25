@@ -40,7 +40,7 @@ def lesson_to_plain_text(day_info: {SchoolDay, bool, str}):
 
 
 def register_schedule_handlers(api: DnevnikApi, bot: TelegramBot):
-    def send_week_day_selector(chat_id: int, offset: int, message_id: int | None = None):
+    def send_week_day_selector(chat_id: int, offset: int, message_id: int = None):
         if message_id is None:
             bot.send_text_message(
                 chat_id=chat_id,

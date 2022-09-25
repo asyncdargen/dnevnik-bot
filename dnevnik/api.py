@@ -37,7 +37,7 @@ class DnevnikApi:
 
         return day, False, None
 
-    def prepare_client(self, first: bool = False) -> DnevnikRestClient | None:
+    def prepare_client(self, first: bool = False) -> DnevnikRestClient:
         try:
             if first:
                 cached = read_auth_cache()

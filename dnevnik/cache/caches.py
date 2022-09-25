@@ -28,7 +28,7 @@ class Cache(Generic[K, V]):
                and self.times.get(key) is not None \
                and self.times.get(key) + self.expire_time > millis()
 
-    def get(self, key) -> V | None:
+    def get(self, key) -> V:
         self.__auto_cleanup()
 
         return self.data.get(key) if self.is_present(key) else None

@@ -51,7 +51,7 @@ class Mark:
         return str(self.value) + (MARK_WEIGHTS[self.weight] if self.weight != 1 else "")
 
 
-def resolve_homework(homework: str | None) -> str | None:
+def resolve_homework(homework: str) -> str:
     return f" {homework}" if (homework is None or len(homework) > 0) and "не задано" not in homework.lower() else None
 
 

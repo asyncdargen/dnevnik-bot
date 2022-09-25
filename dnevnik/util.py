@@ -135,7 +135,7 @@ def get_week_day_date(ordinal, week_start: date = date.today()) -> date:
     return week_start
 
 
-def str_date_time(_datetime: date | datetime) -> str:
+def str_date_time(_datetime) -> str:
     if type(_datetime) is datetime:
         return _datetime.strftime("%H:%M %d.%m.%Y")
     elif type(_datetime) is date:
