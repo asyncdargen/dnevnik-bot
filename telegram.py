@@ -50,8 +50,8 @@ def clear(text):
     return text
 
 
-def args_regexp(*args):
-    "|".join(map(str, args))
+def words_regexp(*args):
+    return "|".join(map(str, args))
 
 
 def data_filter(data):
@@ -79,7 +79,7 @@ def reply_keyboard(*args):
     return markup
 
 
-def inline_keyboard(*args):
+def build_list_inline_markup(*args):
     markup = InlineKeyboardMarkup()
 
     buttons = list()
@@ -97,5 +97,18 @@ def inline_keyboard(*args):
 
     if len(buttons) > 0:
         markup.add(*buttons, row_width=weight)
+
+    return markup
+
+
+def build_dict_inline_markup(*args):
+    markup = InlineKeyboardMarkup()
+
+    for buttons_pairs in args:
+        buttons = list()
+        for (name, data) in buttons_pairs.items():
+            buttons.append(InlineKeyboardButton(name, callback_data=data))
+
+        markup.add(*buttons, row_width=len(buttons_pairs))
 
     return markup

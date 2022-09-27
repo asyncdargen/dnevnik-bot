@@ -31,15 +31,15 @@ class WeekWorkDay:
 
     @staticmethod
     def defaults():
-        WeekWorkDay("MONDAY", "Понедельник", "Пн", lambda: get_week_day_date(0))
-        WeekWorkDay("TUESDAY", "Вторник", "Вт", lambda: get_week_day_date(1))
-        WeekWorkDay("WEDNESDAY", "Среда", "Ср", lambda: get_week_day_date(2))
-        WeekWorkDay("THURSDAY", "Четверг", "Чт", lambda: get_week_day_date(3))
-        WeekWorkDay("FRIDAY", "Пятница", "Пт", lambda: get_week_day_date(4))
+        WeekWorkDay("MONDAY", "Понедельник", "Пн", lambda _week_start: get_week_day_date(0, _week_start))
+        WeekWorkDay("TUESDAY", "Вторник", "Вт", lambda _week_start: get_week_day_date(1, _week_start))
+        WeekWorkDay("WEDNESDAY", "Среда", "Ср", lambda _week_start: get_week_day_date(2, _week_start))
+        WeekWorkDay("THURSDAY", "Четверг", "Чт", lambda _week_start: get_week_day_date(3, _week_start))
+        WeekWorkDay("FRIDAY", "Пятница", "Пт", lambda _week_start: get_week_day_date(4, _week_start))
 
-        WeekWorkDay("TODAY", "Сегодня", "Сейчас", lambda: get_work_day_date(0))
-        WeekWorkDay("TOMORROW", "Завтра", "Следущее", lambda: get_work_day_date(1))
-        WeekWorkDay("AFTER_TOMORROW", "Послезавтра", "Послеследующее", lambda: get_work_day_date(2))
+        WeekWorkDay("TODAY", "Сегодня", "Сейчас", lambda _week_start: get_work_day_date(0))
+        WeekWorkDay("TOMORROW", "Завтра", "Следущее", lambda _week_start: get_work_day_date(1))
+        WeekWorkDay("AFTER_TOMORROW", "Послезавтра", "Послеследующее", lambda _week_start: get_work_day_date(2))
 
     @staticmethod
     def get_by_ordinal(ordinal: int):
@@ -53,8 +53,8 @@ class WeekWorkDay:
             if name in day:
                 return day
 
-    def nearest_date(self) -> date:
-        return self.date_getter()
+    def nearest_date(self, _week_start) -> date:
+        return self.date_getter(_week_start)
 
     def __contains__(self, item) -> bool:
         return type(item) is str and (

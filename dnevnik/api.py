@@ -12,7 +12,7 @@ class DnevnikApi:
         self.schedule_cache = Cache(60, False)
 
     def get_day_lessons(self, day: WeekWorkDay, week_offset: WeekOffset = WeekOffset.get_by_offset(0)):
-        return self.get_lesson_by_date(get_week_day_date(day.ordinal, week_offset.get_week_date()))
+        return self.get_lesson_by_date(day.nearest_date(week_offset.get_week_date()))
 
     def get_lesson_by_date(self, _date: date) -> {SchoolDay, bool, str}:
         cache_key = _date.isoformat()
@@ -37,7 +37,7 @@ class DnevnikApi:
 
         return day, False, None
 
-    def prepare_client(self, first: bool = False) -> DnevnikRestClient:
+    def prepare_client(self, first: bool = False):
         try:
             if first:
                 cached = read_auth_cache()

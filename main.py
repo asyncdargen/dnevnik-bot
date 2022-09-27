@@ -1,11 +1,12 @@
 from os import getenv as env
 
+from dnevnik.object import Credentials
 from schedule import *
 from telegram import *
 
 DEFAULT_KEYBOARD = reply_keyboard(
-    *[day.display.upper() for day in WeekWorkDay.values[5:9]], 3,
-    "Расписание", "Звонки", 2
+    # *[day.display.upper() for day in WeekWorkDay.values[5:9]], 3,
+    "ДЗ", "ЗВОНКИ", 2
 )
 
 
