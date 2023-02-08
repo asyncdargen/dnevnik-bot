@@ -1,6 +1,6 @@
 from dnevnik.util import *
 
-NOT_LESSON = ["Индивидуальный проект"]
+NOT_LESSON = ["Индивидуальный проект", '"КИБЕРНЕТИКА ДЛЯ ШКОЛЬНИКОВ" (Прохорова К.И. 10А и 11А)']
 LESSON_ALIASES = {
     "Математика": "Алгебра",
     "Обществознание": "Общество",
@@ -33,7 +33,10 @@ class SchoolDay:
 
         def resolve_lesson(raw_lesson: dict) -> Lesson:
             self.lessons_count += 1
-            return Lesson(self.lessons_count, self.date, raw_lesson)
+            return Lesson(
+                int(raw_lesson["info"].split(" ", maxsplit=2)[0]) if raw_lesson["info"] else self.lessons_count,
+                self.date, raw_lesson
+            )
 
         self.lessons = {lesson.index: lesson for lesson in map(
             resolve_lesson,
@@ -48,7 +51,7 @@ class Mark:
         self.weight = weight
 
     def __str__(self):
-        return str(self.value) + (MARK_WEIGHTS[self.weight] if self.weight != 1 else "")
+        return str(self.value if self.value != 0 else "·") + (MARK_WEIGHTS[self.weight] if self.weight != 1 else "")
 
 
 def resolve_homework(homework: str) -> str:
@@ -71,7 +74,7 @@ class Lesson:
         self.homework = resolve_homework(raw["lesson"]["homework"])
 
         self.marks = list(
-            map(lambda raw_mark: Mark(int(raw_mark["value"]), int(raw_mark["weight"])), raw["lesson"]["marks"])
+            map(lambda raw_mark: Mark(int(raw_mark["value"] or 0), int(raw_mark["weight"])), raw["lesson"]["marks"])
         )
 
     def is_now(self):

@@ -45,6 +45,7 @@ class DnevnikWebdriver:
         print("[WebDriver] Connecting to auth endpoint...")
 
     def login(self):
+        sleep(1)
         self.find_element(*MOS_ENTER).click()
 
         self.wait_login_form()
